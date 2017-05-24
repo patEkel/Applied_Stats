@@ -1,0 +1,264 @@
+---
+title: "MATH 3070 Lab Project 2"
+author: "Your Name"
+date: "24 May 2017"
+output:
+  html_document:
+    toc: TRUE
+---
+
+*Remember: I expect to see commentary either in the text, in the code with comments created using `#`, or (preferably) both! **Failing to do so may result in lost points!***
+
+
+## Problem 1 (Verzani problem 1.8)
+*For the `exec.pay` data set, apply the functions `mean()`, `min()`, and `max()`. What are the values found?*
+
+```{r}
+# min, max and mean of exec.pay stored in a vector
+MinMaxMean <- c(min(exec.pay),max(exec.pay),mean(exec.pay))
+MinMaxMean # show min, max, mean values
+```
+
+## Problem 2 (Verzani problem 1.10)
+*The `Orange` data set is stored as a data frame with three variables. What are the three variables?*
+
+```{r}
+Orange # print entire data frame
+names(Orange) # print variables (columns) of data
+```
+
+## Problem 3 (Verzani problem 2.1)
+*Look up the documentation of the `length()` function. Then create a vector named `p` using `c()` with values `2 3 5 7 11 13 17 19` and use `length()` to check its length.*
+
+```{r}
+?length # review documentation on length() function
+p <- c(2,3,5,7,11,13,17,19) # instantiate p to a vector
+length(p) # print length of p
+```
+
+## Problem 4 (Verzani problem 2.4)
+*Create the following sequences, using `:`, `seq()`, or `rep()` as appropriate:*
+
+1. `"a" "a" "a" "a" "a" "a"`
+
+```{r}
+# Your solution here
+rep("a", 6)
+```
+
+2. `1 3 ... 99` *(the odd numbers)*
+
+```{r}
+# Your solution here
+seq(1, 99, 2)
+```
+
+3. `1 1 1 2 2 2 3 3 3`
+
+```{r}
+# Your solution here
+j<-c(rep(1, 3), rep(2, 3), rep(3, 3))################################################# CHANGE THISSSSSSS    ###################################################
+
+```
+
+## Problem 5 (Verzani problem 2.9)
+*An experiment had 10 different trials. Create a character vector with 100 different names for the trials, e.g., `"Trial 1" "Trial 2" ...`*
+
+```{r}
+# Your solution here
+#char_vec <- 
+
+```
+
+
+## Problem 6 (Verzani problem 2.3)
+*Let our small data set be* `2 5 4 10 8`.
+
+1. *Enter this data into a data vector `x`.*
+
+```{r}
+# Your code here
+```
+
+2. *Find the square of each number.*
+
+```{r}
+# Your code here
+```
+
+3. *Subtract 6 from each number.*
+
+```{r}
+# Your code here
+```
+
+4. *Subtract 9 from each number and then square the answer.*
+
+```{r}
+# Your code here
+```
+
+## Problem 7 (Verzani problem 2.15)
+*The negation operator `!` is used to reverse Boolean values. For example:*
+
+```{r}
+A <- c(TRUE, FALSE, TRUE, TRUE)
+!A
+```
+
+*One of De Morgan's laws in R code is `!(A & B) == !A | !B`. Verify this with `B <- c(FALSE, TRUE, FALSE, TRUE)` and `A` as above.*
+
+```{r}
+# Your code here
+```
+
+## Problem 8 (Verzani problem 2.19)
+*You track your commute times for two weeks (ten days), recording the following times in minutes:*
+
+`17 16 20 24 22 15 21 15 17 22`
+
+*Enter these into R. Use the function `max()` to find the longest commute time, the function `mean()` to find the average, and the function `min()` to find the minimum.*
+
+```{r}
+# Your code here
+```
+
+*Oops, the 24 was a mistake. It should have been 18. How can you fix this? Do so, and then find the new average.*
+
+```{r}
+# Your code here
+```
+
+*How many times was your commute 20 minutes or more? What percentage of your commutes are less than 18 minutes long?*
+
+```{r}
+# Your code here
+```
+
+## Problem 9 (Verzani problem 2.25)
+*Write a function `isprime()` that checks if a number $x$ is prime by dividing $x$ by all the values in $2, ..., x - 1$ then checking to see if there is a remainder of 0. The expression `a %% b` returns the remainder of `a` divided by `b`.*
+
+```{r}
+# Your code here
+```
+
+***BONUS:** You do not need to check all numbers from 2 to $x - 1$ to see if a number is prime. What is the largest you would need to go for an arbitrary $x$? Create a new function, `isprime2()`, that implements this better (yet still slow) method.*
+
+```{r}
+# Your code here
+```
+
+## Problem 10 (Verzani problem 2.31)
+*For the data sets `bumpers` (**UsingR**), `firstchi` (**UsingR**), and `math` (**UsingR**), make histograms. Try to predict the mean, median, and standard deviation from the graphic. Check your guesses with the appropriate R commands.*
+
+```{r}
+# Your code here
+```
+
+## Problem 11 (Verzani problem 2.32)
+*Fit a density estimate to the data set `pi2000` (**UsingR**). Compare with the appropriate histogram. Why might you want to add an argument like `breaks = 0:10-.5` to `hist()`? (Hint: read the documentation of `hist()` to see what setting this argument does.)*
+
+```{r}
+# Your code here
+```
+
+## Problem 12 (Verzani problem 2.34)
+*The data set `DDT` (**MASS**) contains independent measurements of the pesticide DDT on kale. Make a histogram and a boxplot of the data. From these, estimate the mean and standard deviation. Check your answers with the appropriate functions.*
+
+```{r}
+# Your code here
+```
+
+## Problem 13 (Verzani problem 2.43)
+*The `time` variable in the `nym.2002` data set contains the time to finish the 2002 New York City Marathon for a random sample of the finishers.*
+
+1. *What percent ran the race in under 3 hours?*
+
+```{r}
+# Your code here
+```
+
+2. *What is the time cutoff for the top 10%? The top 25%?*
+
+```{r}
+# Your code here
+```
+
+3. *What time cuts off the bottom 10%?*
+
+```{r}
+# Your code here
+```
+
+## Problem 14 (Verzani problem 2.63)
+*The `lorem` variable in UsingR contains 5 paragraphs of dummy typesetting text that has been in use for centuries. What is the most common letter used? To answer this, you can break a character value into letters by the idiom `unlist(strsplit(x,""))` where `x` is character data.*
+
+```{r}
+# Your code here
+```
+
+*Make a bar chart to visualize the distribution of characters. What do you notice?*
+
+```{r}
+# Your code here
+```
+
+## Problem 15 (Verzani problem 4.1)
+*The data set `UScereal` (**MASS**) contains data on cereals sold in the United States in 1993. For this data set, answer the following questions:*
+
+1. *How many rows does the data frame have? Columns?*
+
+```{r}
+# Your code here
+```
+
+2. *How many different manufacturers are included?*
+
+```{r}
+# Your code here
+```
+
+3. *How many vitamin categories are included?*
+
+```{r}
+# Your code here
+```
+
+4. *How many cereals have a sugar level above 10?*
+
+```{r}
+# Your code here
+```
+
+5. *What is the mean calorie value for cereals with more than 5 grams of fat? Less than or equal to 5?*
+
+```{r}
+# Your code here
+```
+
+6. *What is the mean calorie value for cereals on the middle shelf (2)?*
+
+```{r}
+# Your code here
+```
+
+## Problem 16 (Verzani problem 4.2)
+*R uses lists for many purposes behind the scenes. For example, the output of `lm(mpg ~ wt, data=mtcars)` returns a list. Create this object, then answer the following:*
+
+1. *How many components does this list have?*
+
+```{r}
+# Your code here
+```
+
+2. *What are the names of the components?*
+
+```{r}
+# Your code here
+```
+
+3. *What kind of data is held in the `residuals` variable?*
+
+```{r}
+# Your code here
+```
