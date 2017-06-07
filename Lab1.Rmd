@@ -1,0 +1,70 @@
+---
+title: "MATH 3070 Lab Project 1"
+author: "Patrick Ekel"
+date: "17 May 2017"
+output:
+  html_document:
+    toc: TRUE
+---
+
+*Remember: I expect to see commentary either in the text, in the code with comments created using `#`, or (preferably) both! **Failing to do so may result in lost points!***
+
+## Problem 1 (Verzani problem 1.1)
+*Use R as you would a calculator to find numeric answers to the following:*
+
+** '*' is used to explicitly define multipliation **
+** eval function is used to evaluate expression **
+
+
+1. $1 + 2(3 + 4)$
+
+```{r}
+# '*' was added to explicity define multiplication
+eval(1+2*(3+4))
+```
+
+2. $4^3 + 3^{2 + 1}$
+
+```{r}
+# '^' is used to signify exponent
+eval(4^3+3^(2+1))
+```
+
+
+3. $\sqrt{(4 + 3)(2 + 1)}$
+
+```{r}
+# sqrt function is used to find square root
+eval(sqrt((4+3)*(2+1)))
+```
+
+
+4. $\left(\frac{1+2}{3 + 4} \right)^2$
+
+```{r}
+# parenthesss are crucial for order of ops
+eval(((1+2)/(3 + 4))^2)
+```
+
+## Problem 2 (Verzani problem 1.4)
+*Use R to compute the following:*
+
+
+$$\frac{0.25 - 0.2}{\sqrt{0.2(1-0.2)/100}}$$
+
+```{r}
+# sqrt function is used for square root
+eval((0.25 - 0.2)/sqrt(0.2*(1-0.2)/100))
+```
+
+
+## Problem 3 (Verzani problem 1.7)
+*The `exec.pay` (**UsingR**) data set is available after loading the package **UsingR**. Load the package, and inspect the data set. Scan the values to find the largest one.*
+
+```{r}
+# mac function is used to find max data of argument exec.pay
+# exec.pay is the pay variable o f the ceo data set
+library(UsingR)
+max(exec.pay)
+```
+
