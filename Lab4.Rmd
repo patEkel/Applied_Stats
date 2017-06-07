@@ -1,0 +1,53 @@
+---
+title: "MATH 3070 Lab Project 4"
+author: "Your Name"
+date: "7 June 2017"
+output:
+  html_document:
+    toc: TRUE
+---
+
+*Remember: I expect to see commentary either in the text, in the code with comments created using `#`, or (preferably) both! **Failing to do so may result in lost points!***
+
+## Problem 1 (Verzani problem 5.1)
+*For the `UScereal` (**MASS**) data set, create a scatter plot of `calories` modeled by `sugars` using the `shelf` variable to create different plot characters. Add a legend to indicate the shelf number. Is there any patterns? (Use base R plotting for this problem.)*
+
+```{r, tidy=TRUE}
+# Your code here
+```
+
+## Problem 2 (Verzani problem 5.4)
+*For the data set `batting` (**UsingR**) make a bubble plot of home runs hit (`HR`) modeled by hits (`H`) where the scale factor for each point is given by `sqrt(SO)/10`. Is there any story to be told by the size of the points? (You must use base R plotting for this problem.)*
+
+```{r, tidy=TRUE}
+# Your code here
+```
+
+## Problem 3 (Verzani problem 5.6)
+*For the `batting` (**UsingR**) data set, make parallel boxplots of the batting average (`H/AB`) for each team. Which team had the greatest median average? (Use **lattice** functions for this problem.)*
+
+```{r, tidy=TRUE}
+# Your code here
+```
+
+## Problem 4 (Verzani problem 5.7)
+*For the `mtcars` data set, produce graphics of the following using **ggplot2**:*
+
+1. *Boxplots for miles per gallon (`mpg`) for groups defined by the number of gears (`gear`).*
+
+```{r, tidy=TRUE}
+# Your code here
+```
+
+3. *A scatterplot of `mpg` modeled by horsepower (`hp`). Create facets by the number of cylinders (`cyl`) and `gear`.*
+
+```{r, tidy=TRUE}
+# Your code here
+```
+
+## Problem 5
+*Use any plotting system (base R, **lattice**, **ggplot2**) to create plot involving at least three variables in the `batting` (**UsingR**) data set, showing a relationship not yet visualized in the lecture, the textbook, or this assignment. Explain the relationship you explored and any interesting findings. **Bonus points will be given for plots that I consider exceptionally clean, clear, and insightful, accompanied with good analyses of what you found.***
+
+```{r, tidy = TRUE}
+# Your code here
+```
