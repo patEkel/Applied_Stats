@@ -9,26 +9,104 @@ output:
 
 *Remember: I expect to see commentary either in the text, in the code with comments created using `#`, or (preferably) both! **Failing to do so may result in lost points!***
 
+```{r, tidy=TRUE}
+library(UsingR)
+library(ggplot2)
+library(lattice)
+#
+#
+#
+#
+#
+###     as.factor(cyl)
+#
+#
+#
+#
+#
+```
+
 ## Problem 1 (Verzani problem 5.1)
 *For the `UScereal` (**MASS**) data set, create a scatter plot of `calories` modeled by `sugars` using the `shelf` variable to create different plot characters. Add a legend to indicate the shelf number. Is there any patterns? (Use base R plotting for this problem.)*
 
 ```{r, tidy=TRUE}
 # Your code here
+plot(UScereal$calories, UScereal$sugars)
+with(UScereal, plot(calories, sugars, col = as.numeric(shelf), pch = as.numeric(shelf), xlab = "calories", ylab = "sugars", main = "Cereal Calories vs Sugars by Shelf") )
+legend(397.5, 21.5, c("shelf1", "shelf2", "shelf3"), col = 1:3, pch = 1:3)
 ```
 
 ## Problem 2 (Verzani problem 5.4)
 *For the data set `batting` (**UsingR**) make a bubble plot of home runs hit (`HR`) modeled by hits (`H`) where the scale factor for each point is given by `sqrt(SO)/10`. Is there any story to be told by the size of the points? (You must use base R plotting for this problem.)*
 
 ```{r, tidy=TRUE}
-# Your code here
+# bubble plot of batting H, HR data where bubble size is set by cex parameter
+plot(HR ~ H, data = batting, pch = 16, col=rgb(red = 0, green = 0, blue = 0, alpha = .25), cex = sqrt(SO)/5)
+# The general trend is as the amount of home runs and hits increase, so do the amount of strike outs, as illustraded by the increading size of the bubbles
+
+
+#
+#            ask about this
+#
 ```
 
 ## Problem 3 (Verzani problem 5.6)
 *For the `batting` (**UsingR**) data set, make parallel boxplots of the batting average (`H/AB`) for each team. Which team had the greatest median average? (Use **lattice** functions for this problem.)*
 
 ```{r, tidy=TRUE}
-# Your code here
+# so this is all using base R...not lattice..
+length_range <- range(batting$H/batting$AB)
+# Manually split into three datasets
+batting_ANA <- subset(batting, subset = teamID == "ANA")
+batting_ARI <- subset(batting, subset = teamID == "ARI")
+batting_DET <- subset(batting, subset = teamID == "DET")
+batting_OAK <- subset(batting, subset = teamID == "OAK")
+batting_TBA <- subset(batting, subset = teamID == "TBA")
+batting_MIL <- subset(batting, subset = teamID == "MIL")
+# save old par
+old_par <- par()
+# change the settings
+par(mfrow = c(1,6))
+#boxplot(batting_ANA$H/batting_ANA$AB, data = batting_ANA, ylim = length_range, main = "ANA")
+#boxplot(batting_ARI$H/batting_ARI$AB, data = batting_ARI, ylim = length_range, main = "ARI")
+#boxplot(batting_DET$H/batting_DET$AB, data = batting_DET, ylim = length_range, main = "DET")
+#boxplot(batting_OAK$H/batting_OAK$AB, data = batting_OAK, ylim = length_range, main = "OAK")
+#boxplot(batting_TBA$H/batting_TBA$AB, data = batting_TBA, ylim = length_range, main = "TBA")
+#boxplot(batting_MIL$H/batting_MIL$AB, data = batting_MIL, ylim = length_range, main = "MIL")
+
+head(batting_ANA)
+boxplot(H/AB, data = batting_ANA, ylim = length_range, main = "ANA")
+boxplot(H/AB, data = batting_ARI, ylim = length_range, main = "ARI")
+boxplot(H/AB, data = batting_DET, ylim = length_range, main = "DET")
+boxplot(H/AB, data = batting_OAK, ylim = length_range, main = "OAK")
+boxplot(H/AB, data = batting_TBA, ylim = length_range, main = "TBA")
+boxplot(H/AB, data = batting_MIL, ylim = length_range, main = "MIL")
+
+
+# reset par to its original settings once done
+#par(old_par)
+#
+#
+#
+#   this didnt work for me if not using batting_ANA$H/batt.....need to be that specififc...
+#
+#
+#   ****************?????????????????Lattice???????????
+#
+#
 ```
+
+```{r, tidy=TRUE}
+
+bwplot(batting_ANA$H/batting_ANA$AB, data = batting_ANA, ylim = length_range, main = "ANA")
+bwplot(batting_ARI$H/batting_ARI$AB, data = batting_ARI, ylim = length_range, main = "ARI")
+bwplot(batting_DET$H/batting_DET$AB, data = batting_DET, ylim = length_range, main = "DET")
+bwplot(batting_OAK$H/batting_OAK$AB, data = batting_OAK, ylim = length_range, main = "OAK")
+bwplot(batting_TBA$H/batting_TBA$AB, data = batting_TBA, ylim = length_range, main = "TBA")
+bwplot(batting_MIL$H/batting_MIL$AB, data = batting_MIL, ylim = length_range, main = "MIL")
+
+```
+
 
 ## Problem 4 (Verzani problem 5.7)
 *For the `mtcars` data set, produce graphics of the following using **ggplot2**:*
@@ -37,12 +115,29 @@ output:
 
 ```{r, tidy=TRUE}
 # Your code here
+mtcars
+iris
+qplot(gear, mpg, data = mtcars, geom = "boxplot")
+qplot(Species, Petal.Length, data = iris, geom = "boxplot")
+
+
+
+#
+#
+#
+#   why so much trouble graphing seperatly(based on gear....)
+#
+#
+
 ```
 
 3. *A scatterplot of `mpg` modeled by horsepower (`hp`). Create facets by the number of cylinders (`cyl`) and `gear`.*
 
 ```{r, tidy=TRUE}
 # Your code here
+mtcars
+p<-qplot(hp, mpg, data = mtcars, color = hp) + facet_grid(cyl~gear)
+print(p)
 ```
 
 ## Problem 5
@@ -50,4 +145,5 @@ output:
 
 ```{r, tidy = TRUE}
 # Your code here
+
 ```
