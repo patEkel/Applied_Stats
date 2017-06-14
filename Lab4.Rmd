@@ -1,6 +1,6 @@
 ---
 title: "MATH 3070 Lab Project 4"
-author: "Your Name"
+author: "Patrick Ekel"
 date: "7 June 2017"
 output:
   html_document:
@@ -42,68 +42,16 @@ legend(397.5, 21.5, c("shelf1", "shelf2", "shelf3"), col = 1:3, pch = 1:3)
 ```{r, tidy=TRUE}
 # bubble plot of batting H, HR data where bubble size is set by cex parameter
 plot(HR ~ H, data = batting, pch = 16, col=rgb(red = 0, green = 0, blue = 0, alpha = .25), cex = sqrt(SO)/5)
-# The general trend is as the amount of home runs and hits increase, so do the amount of strike outs, as illustraded by the increading size of the bubbles
-
-
-#
-#            ask about this
-#
+# The general trend is as the amount of home runs and hits increase, so do the amount of strike outs, as # illustraded by the increading size of the bubbles
 ```
 
 ## Problem 3 (Verzani problem 5.6)
 *For the `batting` (**UsingR**) data set, make parallel boxplots of the batting average (`H/AB`) for each team. Which team had the greatest median average? (Use **lattice** functions for this problem.)*
 
 ```{r, tidy=TRUE}
-# so this is all using base R...not lattice..
-length_range <- range(batting$H/batting$AB)
-# Manually split into three datasets
-batting_ANA <- subset(batting, subset = teamID == "ANA")
-batting_ARI <- subset(batting, subset = teamID == "ARI")
-batting_DET <- subset(batting, subset = teamID == "DET")
-batting_OAK <- subset(batting, subset = teamID == "OAK")
-batting_TBA <- subset(batting, subset = teamID == "TBA")
-batting_MIL <- subset(batting, subset = teamID == "MIL")
-# save old par
-old_par <- par()
-# change the settings
-par(mfrow = c(1,6))
-#boxplot(batting_ANA$H/batting_ANA$AB, data = batting_ANA, ylim = length_range, main = "ANA")
-#boxplot(batting_ARI$H/batting_ARI$AB, data = batting_ARI, ylim = length_range, main = "ARI")
-#boxplot(batting_DET$H/batting_DET$AB, data = batting_DET, ylim = length_range, main = "DET")
-#boxplot(batting_OAK$H/batting_OAK$AB, data = batting_OAK, ylim = length_range, main = "OAK")
-#boxplot(batting_TBA$H/batting_TBA$AB, data = batting_TBA, ylim = length_range, main = "TBA")
-#boxplot(batting_MIL$H/batting_MIL$AB, data = batting_MIL, ylim = length_range, main = "MIL")
-
-head(batting_ANA)
-boxplot(H/AB, data = batting_ANA, ylim = length_range, main = "ANA")
-boxplot(H/AB, data = batting_ARI, ylim = length_range, main = "ARI")
-boxplot(H/AB, data = batting_DET, ylim = length_range, main = "DET")
-boxplot(H/AB, data = batting_OAK, ylim = length_range, main = "OAK")
-boxplot(H/AB, data = batting_TBA, ylim = length_range, main = "TBA")
-boxplot(H/AB, data = batting_MIL, ylim = length_range, main = "MIL")
-
-
-# reset par to its original settings once done
-#par(old_par)
-#
-#
-#
-#   this didnt work for me if not using batting_ANA$H/batt.....need to be that specififc...
-#
-#
-#   ****************?????????????????Lattice???????????
-#
-#
-```
-
-```{r, tidy=TRUE}
-
-bwplot(batting_ANA$H/batting_ANA$AB, data = batting_ANA, ylim = length_range, main = "ANA")
-bwplot(batting_ARI$H/batting_ARI$AB, data = batting_ARI, ylim = length_range, main = "ARI")
-bwplot(batting_DET$H/batting_DET$AB, data = batting_DET, ylim = length_range, main = "DET")
-bwplot(batting_OAK$H/batting_OAK$AB, data = batting_OAK, ylim = length_range, main = "OAK")
-bwplot(batting_TBA$H/batting_TBA$AB, data = batting_TBA, ylim = length_range, main = "TBA")
-bwplot(batting_MIL$H/batting_MIL$AB, data = batting_MIL, ylim = length_range, main = "MIL")
+# boxplot of batting average (H/AB) for each different team 
+bwplot(teamID ~ H/AB, data = batting)
+  # ANA had the greatest median average
 
 ```
 
@@ -114,28 +62,15 @@ bwplot(batting_MIL$H/batting_MIL$AB, data = batting_MIL, ylim = length_range, ma
 1. *Boxplots for miles per gallon (`mpg`) for groups defined by the number of gears (`gear`).*
 
 ```{r, tidy=TRUE}
-# Your code here
-mtcars
-iris
-qplot(gear, mpg, data = mtcars, geom = "boxplot")
-qplot(Species, Petal.Length, data = iris, geom = "boxplot")
-
-
-
-#
-#
-#
-#   why so much trouble graphing seperatly(based on gear....)
-#
-#
-
+# ggplot2 uses qplot function name. geom specifies the type of plot while group specifies the critera to group by
+qplot(gear, mpg, data = mtcars, geom = "boxplot", group = gear)
 ```
 
 3. *A scatterplot of `mpg` modeled by horsepower (`hp`). Create facets by the number of cylinders (`cyl`) and `gear`.*
 
 ```{r, tidy=TRUE}
-# Your code here
-mtcars
+# Again using ggplot2 
+# now using default ploit which is scatter but adding a two facets to the grid structure->cyl and gear
 p<-qplot(hp, mpg, data = mtcars, color = hp) + facet_grid(cyl~gear)
 print(p)
 ```
