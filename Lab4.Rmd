@@ -91,15 +91,8 @@ runs_stolen<-qplot(SB, R, data=batting, geom=c("point", "smooth"), method="lm", 
 
 
 
-runs_hr<-qplot(HR, R, data=batting, geom=c("point", "smooth"), method="lm", formula=y~x, color=lgID, main="balls")
+qplot(HR, R, data=batting, geom=c("point", "smooth"), method="lm", formula=y~x, color=lgID, main="balls")
 
-#######################print(runs_hr)
-
-#qplot(runs_hr)
-#plot(runs_hr)
-#runs_rbi
-#tripe
-#double
 
 
 # Multiple plot function
@@ -150,9 +143,15 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 
 
 
+library(ggplot2)
+li
 
+r_dub<-ggplot(batting, aes(x=DOUBLE, y = R, color=lgID)) + geom_point(alpha=.2) + geom_smooth(alpha=.3, size=1) + ggtitle("R~Doubles") + xlab("Doubles") + ylab("Runs")
+r_trip<-ggplot(batting, aes(x=TRIPLE, y = R, color=lgID)) + geom_point(alpha=.2) + geom_smooth(alpha=.3, size=1) + ggtitle("R~Triples") + xlab("Triples") + ylab("Runs")
+r_hr<-ggplot(batting, aes(x=HR, y = R, color=lgID)) + geom_point(alpha=.2) + geom_smooth(alpha=.3, size=1) + ggtitle("R~Home Runs") + xlab("Home Runs") + ylab("Runs")
+r_stolen<-ggplot(batting, aes(x=SB, y=R, color=lgID)) + geom_point(alpha=.2) + geom_smooth(alpha=.3, size=1) + ggtitle("R~Stolen Bases") + xlab("Stolen Bases") + ylab("Runs")
 
-
+multiplot(r_dub, r_trip, r_hr, r_stolen, cols =2)
 
 
 
