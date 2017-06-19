@@ -1,0 +1,172 @@
+---
+title: "MATH 3070 Lab Project 5"
+author: "Patrick Ekel"
+date: "14 June 2017"
+output:
+  html_document:
+    toc: TRUE
+---
+
+
+*Remember: I expect to see commentary either in the text, in the code with comments created using `#`, or (preferably) both! **Failing to do so may result in lost points!***
+
+## Problem 1 (Verzani problem 3.2)
+*For the `michelson` (**MASS**) data set, produce a density plot comparing `Speed` between Experiments 1 and 2.*
+
+```{r, tidy=TRUE}
+# load mass library
+library(MASS)
+
+split_it<-with(michelson, split(Speed, Expt))
+expt1<-split_it$`1`
+expt2<-split_it$`2`
+
+# plot experiment 1 first and 2 second as experiment 1 has a larger range so it is more aesthetically pleasing to plot Expt2 first and Expt1 second
+
+plot(density(expt2), lty = 1)
+lines(density(expt1), lty = 2)
+#
+#
+#
+```
+
+## Problem 2 (Verzani problem 3.4)
+*Three students record the time spent on homework per class. Their data is:*
+
+| Student| 1  | 2  | 3  | 4  | 5 |
+|:-------|---:|---:|---:|---:|--:|
+| Marsha | 25 | 0  | 45 | 90 | 0 |
+| Bill   | 30 | 30 | 30 | 30 |   |
+| Holly  | 15 | 0  | 90 | 0  |   |
+
+*Use a list to store these values. Then create a boxplot to compare.*
+
+```{r, tidy=TRUE}
+# Your code here
+Marsha <- c(25, 0, 45, 90, 0)
+Bill <- c(30, 30, 30, 30, 0)
+Holly <-c(15, 0, 90, 0, 0)
+names<-c("Marsha", "Bill", "Holly")
+masterList<-list(Marsha, Bill, Holly)
+df<-as.data.frame(masterList)
+names(df)<-names
+df
+boxplot(df)
+```
+
+## Problem 3 (Verzani problem 3.5)
+*A group of nursing students take turns measuring some basic assessments. Their data is:*
+
+|          | Temp | Pulse | Systolic | Diastolic |
+|----------|------|-------|----------|-----------|
+| Jackie   | 98.2 | 96    |  134     | 90        |
+| Florence | 98.6 | 56    |  120     | 80        |
+| Mildred  | 98.2 | 76    |  150     | 95        |
+
+*Create a data frame of these values. Will `plot()` and `boxplot()` produce the same graphic?*
+
+```{r, tidy=TRUE}
+# Your code here
+Jackie<-c(98.2, 96, 134, 90)
+Florence<-c(98.6, 56, 120, 80)
+Mildred<-c(98.2, 76, 150, 95)
+masterList2<-list(Jackie, Florence, Mildred)
+df<-as.data.frame(masterList2)
+names<-c("Jackie", "Florence", "Mildred")
+names(df)<-names
+#masterList<-list(Jackie, Florence, Mildred)
+boxplot(df)
+plot(df)
+# plot() and boxplot() does not produce the same graphics..............................??????????????????????????????????????????????????????????????
+```
+
+## Problem 4 (Verzani problem 3.17)
+*The `state.x77` data set contains various information for each of the fifty United States. We wish to explore possible relationships among the variables. First, we make the data set easier to work with by turning it into a data frame.*
+
+```{r}
+x77 <- data.frame(state.x77)
+```
+
+*Now, make scatter plots of `Population` and `Frost`; `Population` and `Murder`; `Population` and `Area`; and `Income` and `HS.Grad`. Do any relationships appear linear? Are there any surprising correlations?*
+
+```{r, tidy=TRUE}
+
+# plot of Frost~Population
+plot(Population, Frost)
+abline(lm(Frost~Population))
+
+# plot of Murder~Population
+plot(Population, Murder)
+abline(lm(Murder~Population))
+
+# Plot of Area~Population
+plot(Population, Area)
+abline(lm(Area~Population))
+
+# There does appear to be a moderate negative relationship between populations and frost and a moderate posative relationship between populations and murder. There negative relationship between Frost and populations is suprising but may be due to latent variable(s) such as geography/weather if fewer people are likley to live in cold regions. 
+```
+
+## Problem 5 (Verzani problem 3.20)
+*The `batting` (**UsingR**) data set contains baseball statistics for the 2002 Major League Baseball season. What is the correlation between the number of strikeouts (`SO`) and the number of home runs (`HR`)? Make a scatter plot to see whether there is any trend. Does the data suggest that in order to hit a lot of home runs one should strike out a lot?*
+
+```{r, tidy=TRUE}
+library(UsingR)
+fit<-lm(HR~SO, data = batting)
+plot(SO, HR)
+# There is indeed a trend that more strike outs are correlated with more home runes. 
+# But correlation does not mean causation. And in this case there is likeley a latent variable such as swing power that is correlated with both strike outs and home runs
+```
+
+## Problem 6 (Verzani problem 3.24)
+*The data frame `x77` contains data from each of the fifty United States. First coerce the `state.x77` variable into a data frame with:*
+
+```{r, eval=FALSE}
+x77 <- data.frame(state.x77)
+```
+
+*For the following, make a scatter plot with the regression line:*
+
+1. *The model of illiteracy rate (`Illiteracy`) modeled by high school graduation rate (`HS.Grad`).*
+
+```{r, tidy=TRUE}
+# generate line of best fit just to see intercept and slope
+line_fit<-lm(HS.Grad~Illiteracy)
+line_fit
+
+# plot HS.Grad~Illiteracy with line of best fit on top
+plot(Illiteracy, HS.Grad)
+abline(lm(HS.Grad~Illiteracy))
+```
+
+2. *The model of life expectancy (`Life.Exp`) modeled by the murder rate (`Murder`).*
+
+```{r, tidy=TRUE}
+# Your code here
+
+```
+
+3. *The model of income (`Income`) modeled by the illiteracy rate (`Illiteracy`).*
+
+```{r, tidy=TRUE}
+# Your code here
+```
+
+*Write a sentence or two describing any relationship for each fo the relationships examined above. In particular, do you find it as expected or surprising?*
+
+## Problem 7 (Verzani problem 3.32)
+*The data set `UScereal` (**MASS**) contains information about cereals on a shelf of a United States grocery store. Make a table showing the relationship between manufacturer, `mfr`, and shelf placement, `shelf`. Are there any obvious differences between manufacturers?*
+
+```{r, tidy=TRUE}
+# Your code here
+attach(UScereal)
+names(UScereal)
+
+```
+
+## Problem 8 (Verzani problem 3.33)
+*The help page for `mosaicplot()` demonstrates the data set `HeadEyeColor`, which records `sex`, `Hair` color, and `Eye` color for 592 statistics students. The data set comes as a flattened table, so simply passing the object to `mosaicplot()` will create the plot. (Or, as demonstrated, passing `shade = TRUE`, as in `mosaicplot(HairEyeColor, shade = TRUE)`, will produce a colored version.)*
+*Make the plot. Why does the help page note, "there are more blue-eyed, blonde females than expected?"*
+
+```{r, tidy=TRUE}
+# Your code here
+```
