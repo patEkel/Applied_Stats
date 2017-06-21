@@ -10,24 +10,27 @@ output:
 
 *Remember: I expect to see commentary either in the text, in the code with comments created using `#`, or (preferably) both! **Failing to do so may result in lost points!***
 
+```{r}
+# load all neccesary libraries
+# load mass library
+library(MASS)
+library(UsingR)
+```
+
+
 ## Problem 1 (Verzani problem 3.2)
 *For the `michelson` (**MASS**) data set, produce a density plot comparing `Speed` between Experiments 1 and 2.*
 
 ```{r, tidy=TRUE}
-# load mass library
-library(MASS)
-
+# split Speed and Expt from the michelson data set
 split_it<-with(michelson, split(Speed, Expt))
+# store experiment 1 and 2 seperatley
 expt1<-split_it$`1`
 expt2<-split_it$`2`
-
-# plot experiment 1 first and 2 second as experiment 1 has a larger range so it is more aesthetically pleasing to plot Expt2 first and Expt1 second
-
+# plot experiment 2 density first and experiemnt 1 density on top second as experiment 1 has a larger range so it is more aesthetically pleasing to plot Expt2 first and Expt1 second
 plot(density(expt2), lty = 1)
 lines(density(expt1), lty = 2)
-#
-#
-#
+
 ```
 
 ## Problem 2 (Verzani problem 3.4)
@@ -42,15 +45,17 @@ lines(density(expt1), lty = 2)
 *Use a list to store these values. Then create a boxplot to compare.*
 
 ```{r, tidy=TRUE}
-# Your code here
+# store values
 Marsha <- c(25, 0, 45, 90, 0)
 Bill <- c(30, 30, 30, 30, 0)
 Holly <-c(15, 0, 90, 0, 0)
 names<-c("Marsha", "Bill", "Holly")
+# create list
 masterList<-list(Marsha, Bill, Holly)
 df<-as.data.frame(masterList)
+# set names
 names(df)<-names
-df
+# create boxplot
 boxplot(df)
 ```
 
@@ -66,10 +71,11 @@ boxplot(df)
 *Create a data frame of these values. Will `plot()` and `boxplot()` produce the same graphic?*
 
 ```{r, tidy=TRUE}
-# Your code here
+# store data
 Jackie<-c(98.2, 96, 134, 90)
 Florence<-c(98.6, 56, 120, 80)
 Mildred<-c(98.2, 76, 150, 95)
+# create list
 masterList2<-list(Jackie, Florence, Mildred)
 df<-as.data.frame(masterList2)
 names<-c("Jackie", "Florence", "Mildred")
@@ -77,7 +83,7 @@ names(df)<-names
 #masterList<-list(Jackie, Florence, Mildred)
 boxplot(df)
 plot(df)
-# plot() and boxplot() does not produce the same graphics..............................??????????????????????????????????????????????????????????????
+# plot() and boxplot() do not produce the same graphics
 ```
 
 ## Problem 4 (Verzani problem 3.17)
@@ -90,18 +96,17 @@ x77 <- data.frame(state.x77)
 *Now, make scatter plots of `Population` and `Frost`; `Population` and `Murder`; `Population` and `Area`; and `Income` and `HS.Grad`. Do any relationships appear linear? Are there any surprising correlations?*
 
 ```{r, tidy=TRUE}
-
 # plot of Frost~Population
-plot(Population, Frost)
-abline(lm(Frost~Population))
+plot(x77$Population, x77$Frost)
+abline(lm(x77$Frost~x77$Population))
 
 # plot of Murder~Population
-plot(Population, Murder)
-abline(lm(Murder~Population))
+plot(x77$Population, x77$Murder)
+abline(lm(x77$Murder~x77$Population))
 
 # Plot of Area~Population
-plot(Population, Area)
-abline(lm(Area~Population))
+plot(x77$Population, x77$Area)
+abline(lm(x77$Area~x77$Population))
 
 # There does appear to be a moderate negative relationship between populations and frost and a moderate posative relationship between populations and murder. There negative relationship between Frost and populations is suprising but may be due to latent variable(s) such as geography/weather if fewer people are likley to live in cold regions. 
 ```
@@ -110,9 +115,8 @@ abline(lm(Area~Population))
 *The `batting` (**UsingR**) data set contains baseball statistics for the 2002 Major League Baseball season. What is the correlation between the number of strikeouts (`SO`) and the number of home runs (`HR`)? Make a scatter plot to see whether there is any trend. Does the data suggest that in order to hit a lot of home runs one should strike out a lot?*
 
 ```{r, tidy=TRUE}
-library(UsingR)
 fit<-lm(HR~SO, data = batting)
-plot(SO, HR)
+plot(batting$SO, batting$HR)
 # There is indeed a trend that more strike outs are correlated with more home runes. 
 # But correlation does not mean causation. And in this case there is likeley a latent variable such as swing power that is correlated with both strike outs and home runs
 ```
@@ -130,12 +134,12 @@ x77 <- data.frame(state.x77)
 
 ```{r, tidy=TRUE}
 # generate line of best fit just to see intercept and slope
-line_fit<-lm(HS.Grad~Illiteracy)
+line_fit<-lm(x77$HS.Grad~x77$Illiteracy)
 line_fit
 
 # plot HS.Grad~Illiteracy with line of best fit on top
-plot(Illiteracy, HS.Grad)
-abline(lm(HS.Grad~Illiteracy))
+plot(x77$Illiteracy, x77$HS.Grad)
+abline(lm(x77$HS.Grad~x77$Illiteracy))
 ```
 
 2. *The model of life expectancy (`Life.Exp`) modeled by the murder rate (`Murder`).*
