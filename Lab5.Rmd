@@ -141,14 +141,17 @@ abline(lm(HS.Grad~Illiteracy))
 2. *The model of life expectancy (`Life.Exp`) modeled by the murder rate (`Murder`).*
 
 ```{r, tidy=TRUE}
-# Your code here
-
+# storing data frame in x77 
+x77 <- data.frame(state.x77)
+# plotting Murder as respoinse variable and Life as predictor variable
+plot(Murder~Life.Exp, data = x77)
 ```
 
 3. *The model of income (`Income`) modeled by the illiteracy rate (`Illiteracy`).*
 
 ```{r, tidy=TRUE}
-# Your code here
+# plotting Illiteracy as response variable and Income as predictor variable
+plot(Illiteracy~Income, data = x77)
 ```
 
 *Write a sentence or two describing any relationship for each fo the relationships examined above. In particular, do you find it as expected or surprising?*
@@ -158,9 +161,13 @@ abline(lm(HS.Grad~Illiteracy))
 
 ```{r, tidy=TRUE}
 # Your code here
-attach(UScereal)
 names(UScereal)
-
+# Two-way table exploring origin and type
+tableCereal <- xtabs(~ shelf + mfr, data = UScereal)
+tableCereal <- xtabs(~ mfr + shelf, data = UScereal)
+tableCereal
+# the table meakes it clear that General Mills and Kellogs clearly have the most product on the shelves. 
+# when looking between shelves, the table makes it clear that the higher shelves have more brands than the lower shelves and are therefore potentially more desirbale. 
 ```
 
 ## Problem 8 (Verzani problem 3.33)
@@ -168,5 +175,8 @@ names(UScereal)
 *Make the plot. Why does the help page note, "there are more blue-eyed, blonde females than expected?"*
 
 ```{r, tidy=TRUE}
-# Your code here
+# plot indendence model of hair and eye color and sex.
+mosaicplot(HairEyeColor, shade = TRUE)
+help("mosaicplot")
+#  when the help page states "..there are more blue eyed blonde females than expected.." it indicates that when looking at the variables independenctly, this graph makes it appear as though the prevelance of blonde, blue eyed females is higher than expected. 
 ```
