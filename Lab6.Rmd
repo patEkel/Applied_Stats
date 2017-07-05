@@ -43,10 +43,10 @@ set.seed(6222016)
 ```
 
 ```{r, tidy=TRUE}
-# Your code here
+# Calculate sample mean
 samp_mean<-replicate(1000, mean(rnorm(10, mean =mean(rivers))))
 mean(samp_mean)
-##################################################################
+# The mean of the sample data and the mean of the actual data is very very similar. THis is becasue of the large sample size
 mean(rivers)
 ```
 
@@ -56,20 +56,19 @@ mean(rivers)
 1. *Find $\bar{x}_{\text{men}} - \bar{x}_{\text{women}}$, the mean difference in survival time (`time`) between men and women (`sex`) in `Melanoma`.*
 
 ```{r, tidy = TRUE}
-# Your code here
+# subset the time data into female and male data
 library(MASS)
 time_male<-subset(Melanoma$time, Melanoma$sex==1) # 1 = male
 time_female<-subset(Melanoma$time, Melanoma$sex==0) # 0 = female
-
+# sample male and female data, caluclate mean
 samp_mean_male<-replicate(1000, mean(rnorm(10, mean =mean(time_male))))
 samp_mean_female<-replicate(1000, mean(rnorm(10, mean =mean(time_female))))
-
+# Store means of male and female data in new variable
 mM<-mean(samp_mean_male)
-mM
 fM<-mean(samp_mean_female)
-fM
+# calculate differnce
 difference<-mM-fM
-difference
+
 ```
 
 2. *Investigate whether the difference you observed in part 1 is significant, using procedures explored in the lecture. There are two groups in this investigation: male (`Melanoma$sex == 0`) and female (`Melanoma$sex == 1`). Randomly reassign the data in the `time` variable to the two groups, and compute the mean difference. Repeat 2000 times (this needs to be done relatively quickly; if it takes over a few minutes, I will dock points), and determine how frequently the difference in the mean survival time between men and women (that is, $\bar{x}_{\text{men}} - \bar{x}_{\text{women}}$ in the simulated data exceeds the same difference observed in the actual data. Does this analysis suggest the difference is due to "noise", or due to an actual difference in survival time between men and women?*
@@ -80,8 +79,16 @@ set.seed(6222016)
 ```
 
 ```{r, tidy=TRUE}
-# Your code here
-
+# load MASS library
+library(MASS)
+# sample the male and female time data
+m<-sample(time_male, 2000, replace=TRUE)
+f<-sample(time_female, 2000, replace=TRUE)
+# calculate the difference of this data 
+diff<-mean(m < diff(f))
+ diff
+# diff value is .158
+# this value is indeed significance and inicates tthat the difference in time between the sexes is not just noise
 ```
 
 ## Problem 4
@@ -93,5 +100,15 @@ set.seed(6222016)
 ```
 
 ```{r, tidy=TRUE}
-# Your code here
+# Calculate mean
+mean(DDT)
+ddt_sim<-sample(DDT, size = length(DDT), replace = TRUE)
+ddt_sim
+mean(ddt_sim)
+# bootstrap, while replicating 2000 times
+mean_boot<-replicate(2000, {
+  mean(sample(DDT, size = length(DDT), replace = TRUE))
+})
+# calculate .025 and .975 quantiles
+quantile(mean_boot, c(.025, .975))
 ```
