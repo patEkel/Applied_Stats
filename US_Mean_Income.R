@@ -19,7 +19,6 @@ head(census)
 library(ggmap)
 map<-get_map(location='united states', zoom=4, maptype = "terrain",
              source='google',color='color')
-
 print(head(census,5))
 library(ggplot2)
 ggmap(map) + geom_point(
